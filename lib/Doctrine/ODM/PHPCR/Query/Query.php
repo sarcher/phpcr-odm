@@ -25,7 +25,15 @@ class Query
     protected $firstResult;
     protected $maxResults;
     protected $documentClass;
+
+    /**
+     * @var QueryInterface
+     */
     protected $query;
+
+    /**
+     * @var DocumentManagerInterface
+     */
     protected $dm;
 
     public function __construct(QueryInterface $query, DocumentManagerInterface $dm, $primaryAlias = null)
@@ -180,7 +188,7 @@ class Query
                 $data = $this->query->execute();
                 break;
             case self::HYDRATE_DOCUMENT:
-                $data = $this->dm->getDocumentsByPhpcrQuery($this->query, $this->documentClass, $this->primaryAlias);
+                $data = $this->dm->getDocumentsByPhpcrQuery($this->query, $this->documentClass);
                 break;
             default:
                 throw QueryException::hydrationModeNotKnown($this->hydrationMode);
@@ -197,6 +205,8 @@ class Query
      * Gets the list of results for the query.
      *
      * Alias for execute(null, $hydrationMode = HYDRATE_DOCUMENT).
+     *
+     * @param int $hydrationMode One of the hydration class constants
      *
      * @return array
      */

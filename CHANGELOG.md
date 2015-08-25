@@ -1,6 +1,11 @@
 Changelog
 =========
 
+* **2015-08-25**: Added a `TranslationConverter` helper to change the 
+                  translation state of a field. It can change a field from 
+                  non-translated to a translation strategy, from one strategy 
+                  to another or return a translated  field to non-translated.
+
 1.3.0-rc2
 ---------
 
