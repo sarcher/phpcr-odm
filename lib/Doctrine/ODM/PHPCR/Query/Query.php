@@ -188,7 +188,7 @@ class Query
                 $data = $this->query->execute();
                 break;
             case self::HYDRATE_DOCUMENT:
-                $data = $this->dm->getDocumentsByPhpcrQuery($this->query, $this->documentClass);
+                $data = $this->dm->getDocumentsByPhpcrQuery($this->query, $this->documentClass, $this->primaryAlias);
                 break;
             default:
                 throw QueryException::hydrationModeNotKnown($this->hydrationMode);

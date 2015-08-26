@@ -144,13 +144,20 @@ class TranslationConverter
         $qb = $this->dm->createQueryBuilder();
         $or = $qb->fromDocument($class, 'd')
             ->where()->orX();
-        foreach($fields as $field) {
+        foreach ($fields as $field) {
             $or->fieldIsset('d.'.$field);
         }
         $qb->setMaxResults($this->batchSize);
         $documents = $qb->getQuery()->execute();
 
+        // restore meta data to the real thing
         $currentMeta->translator = $currentStrategyName;
+        if (!$currentStrategyName) {
+            $currentMeta->translatableFields = array();
+            foreach ($fields as $field) {
+                unset($currentMeta->mappings[$field]['translated']);
+            }
+        }
 
         // fake metadata for previous
         $previousMeta = clone $currentMeta;

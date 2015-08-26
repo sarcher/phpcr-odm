@@ -208,7 +208,6 @@ class TranslationConverterTest extends PHPCRFunctionalTestCase
         $this->assertEquals('Lorem ipsum...', $commentDoc->getText());
     }
 
-
     public function testTranslateAttributeToChild()
     {
         $class = 'Doctrine\Tests\Models\Translation\ChildTranslationComment';

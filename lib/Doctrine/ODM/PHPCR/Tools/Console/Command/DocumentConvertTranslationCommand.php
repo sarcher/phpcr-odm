@@ -87,7 +87,7 @@ HERE
         $previous = $input->getOption('previous-strategy');
         $fields = $input->getOption('fields');
 
-        while($converter->convert($class, $previous, $fields)) {
+        while ($converter->convert($class, $previous, $fields)) {
             $session->save();
             $output->write('.');
         }
